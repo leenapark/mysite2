@@ -21,12 +21,11 @@ public class GuestBookController extends HttpServlet {
 			throws ServletException, IOException {
 		// 모두 사용 가능한 메소드 정리
 		GuestDao guestDao = new GuestDao();
-
+		request.setCharacterEncoding("UTF-8");
 		
 		// 컨트롤러 테스트
 		System.out.println("guestbookcontroller");
 
-		request.setCharacterEncoding("UTF-8");
 
 		// 파라미터로 액션 값을 읽음
 		String action = request.getParameter("action");
