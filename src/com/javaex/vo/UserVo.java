@@ -12,12 +12,17 @@ public class UserVo {
 	
 	
 	// 생성자
-	
+	// 디폴트 생성자
 	public UserVo() {
 	}
 
+	// getUser 생성자
+	public UserVo(int no, String name) {
+		this.no = no;
+		this.name = name;
+	}
+
 	//	insert 생성자
-	
 	public UserVo(String id, String password, String name, String gender) {
 		this.id = id;
 		this.password = password;
@@ -25,6 +30,7 @@ public class UserVo {
 		this.gender = gender;
 	}
 	
+	//
 	public UserVo(int no, String id, String password, String name, String gender) {
 		this.no = no;
 		this.id = id;
@@ -34,6 +40,8 @@ public class UserVo {
 	}
 	
 	
+
+
 	// 메소드 g/s
 	
 
