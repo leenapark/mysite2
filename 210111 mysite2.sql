@@ -35,3 +35,17 @@ select  no,
         name,
         gender
 from users;
+
+--데이터 선택 가져오기
+select  no,
+        name
+from users
+where id = 'aaa'
+and password = '1234';
+
+
+--데이터 수정하기
+update users
+set name = '송지효',
+    gender = 'male'
+where id = 'aaa';
