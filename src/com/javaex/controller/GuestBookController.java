@@ -35,7 +35,7 @@ public class GuestBookController extends HttpServlet {
 
 		// action = ? --> ?에 해당하는 일을 할 수 있는 코드 짜기
 
-		// action = addlist
+		// action = add
 		if ("add".equals(action)) {
 			System.out.println("저장");
 
