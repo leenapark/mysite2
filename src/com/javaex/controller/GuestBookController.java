@@ -36,6 +36,7 @@ public class GuestBookController extends HttpServlet {
 
 		// action = add
 		if ("add".equals(action)) {
+			
 			System.out.println("저장");
 
 			// 방명록 받은 값 저장하기
@@ -63,6 +64,7 @@ public class GuestBookController extends HttpServlet {
 			WebUtil.forword(request, response, "WEB-INF/views/guestbook/deleteForm.jsp");
 
 		} else if ("delete".equals(action)) {
+			
 			System.out.println("삭제 처리");
 			
 			int check = guestDao.guestDelete(Integer.parseInt(request.getParameter("no")),
@@ -99,6 +101,7 @@ public class GuestBookController extends HttpServlet {
 			
 			
 			WebUtil.forword(request, response, "WEB-INF/views/guestbook/addList.jsp");
+			
 		}
 		
 		
