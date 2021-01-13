@@ -137,7 +137,7 @@ public class UserDao {
 		}
 		
 		//**********한사람 정보 꺼내기********
-		public UserVo getUpdate(int no) {
+		public UserVo getInfo(int no) {
 			UserVo userVo = null;
 			
 			getconnection();

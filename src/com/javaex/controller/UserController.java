@@ -19,6 +19,7 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		UserDao userDao = new UserDao();
 		request.setCharacterEncoding("UTF-8");
 		
 		System.out.println("usercontroller");
@@ -47,7 +48,7 @@ public class UserController extends HttpServlet {
 			System.out.println(userVo.toString());
 			
 			// dao 클래스 insert(vo) 사용 --> 저장 --> 회원가입 성공
-			UserDao userDao = new UserDao();
+			userDao = new UserDao();
 			userDao.insert(userVo);
 			
 			// 포워드 --> joinOk.jsp
@@ -67,7 +68,7 @@ public class UserController extends HttpServlet {
 			String pw = request.getParameter("pw");
 			
 			// dao --> getUser
-			UserDao userDao = new UserDao();
+			userDao = new UserDao();
 			UserVo authVo = userDao.getUser(id, pw);
 			
 			// vo 확인
@@ -105,40 +106,49 @@ public class UserController extends HttpServlet {
 		} else if ("modifyForm".equals(action)) {
 			
 			System.out.println("회원 정보 수정 폼");
-			UserDao userDao = new UserDao();
-
+			/*세션에 담긴 정보 no랑 name 값 중 번호를 가져온다*/
+			
+			// 수정할 사람의 고유 번호를 받기
 			int num = Integer.parseInt(request.getParameter("no"));
 			
-			UserVo userVo = userDao.getUpdate(num);
+			// 수정할 사람의 모든 정보를 가져온다
+			UserVo userVo = userDao.getInfo(num);
+			// 정보 확인 겸 진행 확인
 			System.out.println(userVo);
 			
+			// 세션의 수정할 사람의 정보를 다 담아서 보낸다
 			HttpSession session = request.getSession();
 			session.setAttribute("upUser", userVo);
-			
-
-			
+						
 			WebUtil.forword(request, response, "WEB-INF/views/user/modifyForm.jsp");
 			
 		} else if ("update".equals(action)) {
 			System.out.println("수정");
 			
+			// 수정할 정보 가져오기
 			String pass = request.getParameter("pass");
 			String name = request.getParameter("uname");
 			String gender = request.getParameter("gender");
 			String id = request.getParameter("uid");
 
-			
+			// 수정 정보 담기
 			UserVo userVo = new UserVo(id, pass, name, gender);
+			// 수정할 정보 확인
 			System.out.println(userVo);
-			UserDao userDao = new UserDao();
+
+			// 수정
 			userDao.upDate(userVo);
 			
+			// 세션으로 보내줄 정보
 			UserVo authVo = userDao.getUser(id, pass);
 			
+			// 세션
 			HttpSession session = request.getSession();
 			session.setAttribute("authUser", authVo);
 			
+			// 수정한 후 메인으로 리다이렉트 해주기
 			WebUtil.redirect(request, response, "/mysite2/main");
+			
 
 		} else {
 			WebUtil.redirect(request, response, "/mysite2/main");
