@@ -4,7 +4,7 @@
 
 	int num = Integer.parseInt(request.getParameter("no"));
 	System.out.println(num);		//파라미터로 가져온 정보가 잘 넘어오는지 확인
-		
+
 %>    
     
 <!DOCTYPE html>
@@ -51,9 +51,10 @@
                 <div class="clear"></div>
             </div>
             <!-- //content-head -->
-
+			
 			<div id="guestbook">
 				<form action="/mysite2/gbc" method="post">
+					
 					<table id="guestDelete">
 						<colgroup>
 							<col style="width: 10%;">
@@ -65,7 +66,7 @@
 							<td>비밀번호</td>
 							<td><input type="password" name="pass"></td>
 							<td class="text-left"><button type="submit">삭제</button></td>
-							<td><a href="//mysite2/gbc">[메인으로 돌아가기]</a></td>
+							<td><a href="/mysite2/gbc">[메인으로 돌아가기]</a></td>
 						</tr>
 					</table>
 					<input type='hidden' name="no" value="<%=num %>">
