@@ -84,7 +84,7 @@ public class GuestBookController extends HttpServlet {
 				// 확인용 메세지 출력
 				System.out.println("비밀번호가 틀렸습니다");
 				
-				WebUtil.redirect(request, response, "/mysite2/gbc");
+				WebUtil.redirect(request, response, "/mysite2/gbc?action=dForm&no="+request.getParameter("no"));
 
 			}
 
