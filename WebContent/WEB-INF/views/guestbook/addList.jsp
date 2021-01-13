@@ -5,10 +5,7 @@
 <%@ page import="com.javaex.vo.UserVo" %>
 
 
-<%
-	UserVo authUser = (UserVo)session.getAttribute("authUser");
-	System.out.println("방명록: " + authUser);
-
+<%	
 	List<GuestVo> addList = (List<GuestVo>)request.getAttribute("aList");
 	System.out.println("=====addlist.jsp======");
 	System.out.println(addList);
@@ -27,37 +24,13 @@
 <body>
 	<div id="wrap">
 
-		<div id="header">
-			<h1>
-				<a href="/mysite2/main">MySite</a>
-			</h1>
-
-			<%if(authUser == null) {%>
-			<ul>
-				<li><a href="/mysite2/user?action=loginForm">로그인</a></li>
-				<li><a href="/mysite2/user?action=joinForm">회원가입</a></li>
-			</ul>
-			<%} else { %>
-			<!-- if(로그인 했으면 = session 영역에 값이 있으면)-->
-			<ul>
-				<li><%=authUser.getName() %> 님 안녕하세요^^</li>
-				<li><a href="">로그아웃</a></li>
-				<li><a href="/mysite2/user?action=modifyForm">회원정보수정</a></li>
-			</ul>
-			<%} %>
-		</div>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul>
-				<li><a href="/mysite2/gbc">방명록</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">입사지원서</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
-		<!-- //nav -->
+		<!-- include로 따로 옮겼음 -->
+		<!-- //header + nav -->
+		<!-- include 코드 사용으로 header + navi 를 공통으로 만들어줘서 include 코드로 불러옴 -->
+		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<!-- //header + nav -->
+		
+		
 
 		<div id="aside">
 			<h2>방명록</h2>
@@ -94,9 +67,9 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th><label class="form-text" for="input-uname">이름</label></td>
+								<td><label class="form-text" for="input-uname">이름</label></td>
 								<td><input id="input-uname" type="text" name="name"></td>
-								<th><label class="form-text" for="input-pass">패스워드</label></td>
+								<td><label class="form-text" for="input-pass">패스워드</label></td>
 								<td><input id="input-pass" type="password" name="pass"></td>
 							</tr>
 							<tr>
@@ -113,6 +86,7 @@
 					
 				</form>	
 				
+				<!-- 예시 -->
 				<table class="guestRead">
 					<colgroup>
 						<col style="width: 10%;">
@@ -130,6 +104,8 @@
 						<td colspan=4 class="text-left">방명록 글입니다. 방명록 글입니다.</td>
 					</tr>
 				</table>
+				<!-- 예시 -->
+				
 				<!-- //guestRead -->
 				<%for (int i=0; i<addList.size(); i++) { %>
 				<table class="guestRead">
@@ -155,12 +131,13 @@
 			</div>
 			<!-- //guestbook -->
 		</div>
+		
+		
 		<!-- //content  -->
 		<div class="clear"></div>
 		
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
-		</div>
+		<!-- //footer -->
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
 
 	</div>

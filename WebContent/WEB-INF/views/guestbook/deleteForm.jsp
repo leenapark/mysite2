@@ -20,28 +20,13 @@
 <body>
 	<div id="wrap">
 
-		<div id="header">
-			<h1>
-				<a href="/mysite2/main">MySite</a>
-			</h1>
-
-			<ul>
-				<li><a href="/mysite2/user?action=loginForm">로그인</a></li>
-				<li><a href="/mysite2/user?action=joinForm">회원가입</a></li>
-			</ul>
-		</div>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul>
-				<li><a href="/mysite2/gbc">방명록</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">입사지원서</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
-		<!-- //nav -->
+		<!-- include로 따로 옮겼음 -->
+		<!-- //header + nav -->
+		<!-- include 코드 사용으로 header + navi 를 공통으로 만들어줘서 include 코드로 불러옴 -->
+		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<!-- //header + nav -->
+		
+		
 
 		<div id="aside">
 			<h2>방명록</h2>
@@ -80,7 +65,7 @@
 							<td>비밀번호</td>
 							<td><input type="password" name="pass"></td>
 							<td class="text-left"><button type="submit">삭제</button></td>
-							<td><a href="/guestbook2/gbc">[메인으로 돌아가기]</a></td>
+							<td><a href="//mysite2/gbc">[메인으로 돌아가기]</a></td>
 						</tr>
 					</table>
 					<input type='hidden' name="no" value="<%=num %>">
@@ -93,10 +78,10 @@
 		<!-- //content  -->
 		<div class="clear"></div>
 		
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
-		</div>
 		<!-- //footer -->
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<!-- //footer -->
+
 
 	</div>
 	<!-- //wrap -->
