@@ -12,6 +12,8 @@ public class UserDaoTest {
 		
 		System.out.println("userVo:" + userVo);
 
+		
+		
 	}
 
 }

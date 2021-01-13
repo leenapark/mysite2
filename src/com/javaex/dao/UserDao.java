@@ -136,8 +136,8 @@ public class UserDao {
 			return userVo;
 		}
 		
-		//**********한사람 정보 꺼내기********
-		public UserVo getInfo(int no) {
+		//**********한사람 정보 꺼내기********오버 로딩
+		public UserVo getUser(int no) {
 			UserVo userVo = null;
 			
 			getconnection();
@@ -200,7 +200,7 @@ public class UserDao {
 					query += " set 	name = ?, ";
 					query += "		password = ?, ";
 					query += "		gender = ? ";
-					query += " where id = ? ";
+					query += " where no = ? ";
 
 					System.out.println(query);
 
@@ -209,7 +209,7 @@ public class UserDao {
 					pstmt.setString(1, userVo.getName());
 					pstmt.setString(2, userVo.getPassword());
 					pstmt.setString(3, userVo.getGender());
-					pstmt.setString(4, userVo.getId());
+					pstmt.setInt(4, userVo.getNo());
 
 					count = pstmt.executeUpdate();
 					
