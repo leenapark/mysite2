@@ -69,6 +69,8 @@ public class UserController extends HttpServlet {
 			// dao --> getUser
 			UserVo authVo = userDao.getUser(id, pw);
 			
+
+
 			// vo 확인
 			System.out.println("vo" + authVo);	//id pw (DB에서 가져올 데이터 정보) --> no, name (원하는 데이터)
 			
@@ -76,8 +78,12 @@ public class UserController extends HttpServlet {
 				// 로그인 실패
 				System.out.println("로그인 실패");
 				
+				String result = "fail";
+
 				//	리다이렉트 --> 로그인 폼
 				WebUtil.redirect(request, response, "/mysite2/user?action=loginForm&result=fail");
+				
+				
 				
 			} else {
 				//	성공일 때
@@ -113,9 +119,10 @@ public class UserController extends HttpServlet {
 			UserVo userVo = userDao.getUser(authUser.getNo());
 			
 			// 정보 확인 겸 진행 확인
-			System.out.println(userVo);
+			System.out.println("ahrhUser" + userVo);
 			
 			request.setAttribute("userVo", userVo);
+			
 			
 			
 			/* 수정 전 짠 코드
@@ -144,7 +151,7 @@ public class UserController extends HttpServlet {
 			int no = authUser.getNo();
 			
 			//수정 2번
-			String id = request.getParameter("uid");
+			//String id = request.getParameter("uid");
 			
 
 			// 수정 정보 담기

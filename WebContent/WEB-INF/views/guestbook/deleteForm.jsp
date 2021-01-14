@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-	int num = Integer.parseInt(request.getParameter("no"));
-	System.out.println(num);		//파라미터로 가져온 정보가 잘 넘어오는지 확인
 
-%>    
     
 <!DOCTYPE html>
 <html>
@@ -22,8 +18,7 @@
 
 		<!-- include로 따로 옮겼음 -->
 		<!-- //header + nav -->
-		<!-- include 코드 사용으로 header + navi 를 공통으로 만들어줘서 include 코드로 불러옴 -->
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //header + nav -->
 		
 		
@@ -69,7 +64,8 @@
 							<td><a href="/mysite2/gbc">[메인으로 돌아가기]</a></td>
 						</tr>
 					</table>
-					<input type='hidden' name="no" value="<%=num %>">
+					
+					<input type='hidden' name="no" value="${param.no }">
 					<input type='hidden' name="action" value="delete">
 				</form>
 				
@@ -80,7 +76,7 @@
 		<div class="clear"></div>
 		
 		<!-- //footer -->
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
 
 

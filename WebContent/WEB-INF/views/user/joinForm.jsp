@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
     
 <!DOCTYPE html>
 <html>
@@ -17,8 +18,7 @@
 
 		<!-- include로 따로 옮겼음 -->
 		<!-- //header + nav -->
-		<!-- include 코드 사용으로 header + navi 를 공통으로 만들어줘서 include 코드로 불러옴 -->
-		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 		<!-- //header + nav -->
 		
 		
@@ -106,7 +106,7 @@
 		<div class="clear"></div>
 		
 		<!-- //footer -->
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
 		<!-- //footer -->
 
 	</div>

@@ -67,6 +67,7 @@ public class GuestBookController extends HttpServlet {
 			
 			System.out.println("삭제 처리");
 			
+			
 			int check = guestDao.guestDelete(Integer.parseInt(request.getParameter("no")),
 					request.getParameter("pass"));
 
