@@ -38,7 +38,6 @@ public class GuestBookController extends HttpServlet {
 		if ("add".equals(action)) {
 			
 			System.out.println("저장");
-
 			// 방명록 받은 값 저장하기
 			String name = request.getParameter("name");
 			String password = request.getParameter("pass");
