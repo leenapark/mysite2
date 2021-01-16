@@ -78,7 +78,7 @@ public class UserController extends HttpServlet {
 				// 로그인 실패
 				System.out.println("로그인 실패");
 				
-				String result = "fail";
+				//String result = "fail";
 
 				//	리다이렉트 --> 로그인 폼
 				WebUtil.redirect(request, response, "/mysite2/user?action=loginForm&result=fail");
@@ -119,22 +119,10 @@ public class UserController extends HttpServlet {
 			UserVo userVo = userDao.getUser(authUser.getNo());
 			
 			// 정보 확인 겸 진행 확인
-			System.out.println("ahrhUser" + userVo);
+			System.out.println("ahrhUser: " + userVo);
 			
 			request.setAttribute("userVo", userVo);
 			
-			
-			
-			/* 수정 전 짠 코드
-			// 수정할 사람의 모든 정보를 가져온다
-			UserVo userVo = userDao.getInfo(num);
-			// 정보 확인 겸 진행 확인
-			System.out.println(userVo);
-			
-			// 세션의 수정할 사람의 정보를 다 담아서 보낸다
-			HttpSession session = request.getSession();
-			session.setAttribute("upUser", userVo);
-			*/		
 			WebUtil.forword(request, response, "WEB-INF/views/user/modifyForm.jsp");
 			
 		} else if ("modify".equals(action)) {
