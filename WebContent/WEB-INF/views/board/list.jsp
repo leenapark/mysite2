@@ -81,10 +81,11 @@
 								<tr>
 								<td>${list.no }</td>
 								<td class="text-left"><a href="/mysite2/board?action=content&no=${list.no }">${list.title }</a></td>
-								<td>${authUSer.name }</td>
+								<td>${list.name }</td>
 								<td>${list.hit }</td>
 								<td>${list.regDate }</td>
-								<td><a href="">[삭제]</a></td>
+								<td><c:if test="${authUser.name == list.name }"><a href="/mysite2/board?action=delete&no=${list.no }">[삭제]</a></c:if></td>
+								
 							</tr>
 							</c:forEach>
 						</tbody>
@@ -109,8 +110,11 @@
 						
 						<div class="clear"></div>
 					</div>
-					<c:if test="${sessionScope.name != null }">
-					<a id="btn_write" href="/mysite2/board?action=write">글쓰기</a>
+					
+					
+					
+					<c:if test="${authUser.name != null }">
+					<a id="btn_write" href="/mysite2/board?action=wform">글쓰기</a>
 					</c:if>
 				</div>
 				<!-- //list -->

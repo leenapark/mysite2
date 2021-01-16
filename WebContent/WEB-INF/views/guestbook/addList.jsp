@@ -88,7 +88,7 @@
 				
 				<!-- //guestRead -->
 				
-				for (int i=0; iaddList.size(); i++) {
+				
 				
 				<table class="guestRead">
 				<c:forEach items="${aList}" var="list">

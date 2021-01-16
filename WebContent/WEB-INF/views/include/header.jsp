@@ -4,7 +4,7 @@
 
 <%
 	UserVo authUser = (UserVo)session.getAttribute("authUser");
-	System.out.println(authUser);
+	System.out.println("session" + authUser);
 %>
 
 <div id="header">

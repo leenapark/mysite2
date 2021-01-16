@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,8 @@
 
 <body>
 	<div id="wrap">
-
+			
+			
 		<!-- include로 따로 옮겼음 -->
 		<!-- //header + nav -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
@@ -24,6 +26,7 @@
 		
 		<c:import url="/WEB-INF/views/include/aside.jsp"></c:import>
 		<!-- //aside -->
+		
 
 		<div id="content">
 
@@ -39,67 +42,65 @@
 				<div class="clear"></div>
 			</div>
 			<!-- //content-head -->
-			
-			<div id="board">
-				<div id="read">
-					<form action="/mysite2/board" method="get">
 
+			<div id="board">
+				<div id="modifyForm">
+					<form action="/mysite2/board" method="get">
 						<!-- 작성자 -->
 						<div class="form-group">
 							<span class="form-text">작성자</span>
-							<span class="form-value">${read.name } </span>
+							<span class="form-value">${post.name }</span>
 						</div>
-
+						
 						<!-- 조회수 -->
 						<div class="form-group">
 							<span class="form-text">조회수</span>
-							<span class="form-value">${read.hit }</span>
+							<span class="form-value">${post.hit }</span>
 						</div>
 						
 						<!-- 작성일 -->
 						<div class="form-group">
 							<span class="form-text">작성일</span>
-							<span class="form-value">${read.regDate }</span>
+							<span class="form-value">${post.regDate }</span>
 						</div>
 						
 						<!-- 제목 -->
 						<div class="form-group">
-							<span class="form-text">제 목</span>
-							<span class="form-value">${read.title }</span>
+							<label class="form-text" for="txt-title">제목</label>
+							<input type="text" id="txt-title" name="title" value="${post.title }">
 						</div>
 					
-						<!-- 내용 -->
-						<div id="txt-content">
-							<span class="form-value" >
-								${read.content }
-							</span>
-						</div>
-												
-						<c:if test="${authUser.name == read.name }">
-						<a id="btn_modify" href="/mysite2/board?action=mform&no=${read.no }">수정</a>
-						</c:if>
-						<a id="btn_modify" href="/mysite2/board?action=list">목록</a>
 						
+					
+						<!-- 내용 -->
+						<div class="form-group">
+							<textarea id="txt-content" name="content">${post.content }
+							</textarea>
+							
+						</div>
+						
+						<a id="btn_cancel" href="/mysite2/board?action=mform&no=${read.no }">취소</a>
+						<button id="btn_modify" type="submit">수정</button>
+						
+						<input type="text" name="action" value="modify">
+						<input type="text" name="bno" value="${post.no }">
 					</form>
 	                <!-- //form -->
-	                
 				</div>
-				<!-- //read -->
-				
+				<!-- //modifyForm -->
 			</div>
 			<!-- //board -->
 		</div>
 		<!-- //content  -->
-		
 		<div class="clear"></div>
-		
+
 		<div id="footer">
 			Copyright ⓒ 2020 황일영. All right reserved
 		</div>
 		<!-- //footer -->
 	</div>
 	<!-- //wrap -->
-	
+
 </body>
 
 </html>

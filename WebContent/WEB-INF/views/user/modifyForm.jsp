@@ -75,6 +75,7 @@
 						<!-- //성별 -->
 						<div class="form-group">
 							<span class="form-text">성별</span> 
+
 							<c:choose>
 								<c:when test="${userVo.gender == 'male' }">
 									<label for="rdo-male">남</label> 
