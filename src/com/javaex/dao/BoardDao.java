@@ -79,19 +79,17 @@ public class BoardDao {
 			query += "			to_char(b.reg_date, 'yyyy-mm-dd') regDate, ";
 			query += "			b.user_no, ";
 			query += "			u.name ";
+			query += " from board b, users u ";
+			query += " where u.no = b.user_no ";
 
-			pstmt = conn.prepareStatement(query);
-			if (str == null) {
-				query += " from board b, users u ";
-				query += " where u.no = b.user_no ";
+			if (str == null || str == "") {
+
 				query += " order by b.no desc ";
 
 				pstmt = conn.prepareStatement(query);
 
 			} else {
 
-				query += " from board b, users u ";
-				query += " where u.no = b.user_no ";
 				query += " and (b.title like ? ";
 				query += " or u.name like ? ";
 				query += " or b.reg_date like ? ) ";

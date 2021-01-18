@@ -115,6 +115,7 @@ public class GuestDao {
 			query += "		  content, ";
 			query += "		  to_char(reg_date, 'YYYY-MM-DD HH24:mi:ss') reg_date "; //시간 설정 찾아보기
 			query += " from guestbook";
+			query += " order by no desc ";
 
 			// 쿼리문 만들기
 			pstmt = conn.prepareStatement(query);
@@ -176,53 +177,6 @@ public class GuestDao {
 		return count;
 	}
 
-	/*	삭제 코드에서 no 값과 password 값을 받아서 일치하는 건 삭제돼서 비밀번호 확인이 따로 필요하지 않음
-	// **********비밀 번호 확인**********
-	public GuestVo getPass(int no, String pass) {
-		GuestVo guestVo = null;
-		
-		getconnection();
-
-		
-		try {
-			// 3. SQL문 준비 / 바인딩 / 실행
-
-			String query = "";
-			query += " select no, ";
-			query += "		  password";			
-			query += " from guestbook ";
-			query += " where no = ? ";
-			query += " and password = ?";
-			
-			//System.out.println(query);
-
-			// 쿼리문 만들기
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, no);
-			pstmt.setString(2, pass);
-			
-			rs = pstmt.executeQuery();
-
-			// 4.결과처리
-			while(rs.next()) {
-				int num = rs.getInt("no");
-				String word = rs.getString("password");
-
-				guestVo = new GuestVo(num, word);
-			}
-
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		}
-
-		close();
-
-		System.out.println(guestVo);
-		return guestVo;
-		
-	}
-	
-	*/
 	/**************비밀번호 정보 가져오기************/
 	public GuestVo getInfo(int no) {
 		GuestVo guestVo = null;
