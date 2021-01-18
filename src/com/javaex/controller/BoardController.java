@@ -2,6 +2,7 @@ package com.javaex.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +22,7 @@ public class BoardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
 		BoardDao boardDao = new BoardDao();
 
@@ -30,34 +32,20 @@ public class BoardController extends HttpServlet {
 		System.out.println("=====action======");
 		System.out.println(action);
 
-		if ("list".equals(action)) {
-			System.out.println("게시판");
-
-			// 화면 출력용 리스트 만들기
-			List<BoardVo> bList = boardDao.getList();
-
-			System.out.println("blist: " + bList);
-
-			request.setAttribute("bList", bList);
-
-			WebUtil.forword(request, response, "WEB-INF/views/board/list.jsp");
-
-		} else if ("content".equals(action)) {
+		if ("content".equals(action)) {
 			
 			System.out.println("글 읽기");
 			
 			int no = Integer.parseInt(request.getParameter("no"));
 			System.out.println(no);
 
-			BoardVo readVo = boardDao.getread(no);
+			BoardVo readVo = boardDao.getRead(no);
 
 			System.out.println("controller: " + readVo);
 
 			HttpSession session = request.getSession();
 			UserVo authUser = (UserVo) session.getAttribute("authUser");
 			
-			
-
 			if(authUser == null) {
 
 				boardDao.hitUp(no);
@@ -121,7 +109,7 @@ public class BoardController extends HttpServlet {
 			System.out.println("글 수정 폼: " + bno);
 			
 			
-			BoardVo boardVo = boardDao.getPost(bno);
+			BoardVo boardVo = boardDao.getRead(bno);
 			request.setAttribute("post", boardVo);
 			
 			System.out.println("boardVo: " + boardVo);
@@ -152,8 +140,27 @@ public class BoardController extends HttpServlet {
 			boardDao.delete(no);
 			
 			WebUtil.redirect(request, response, "/mysite2/board?action=list");
-
+		} else {
 			
+			System.out.println("게시판");
+			System.out.println("검색");
+
+			String str = request.getParameter("str");
+			System.out.println(str);
+			
+			List<BoardVo> searchList = boardDao.getList(str);
+			
+			System.out.println(searchList);
+			
+			// 화면 출력용 리스트 만들기
+			//List<BoardVo> bList = boardDao.getList();
+
+			System.out.println("blist: " + searchList);
+
+			request.setAttribute("bList", searchList);
+
+			WebUtil.forword(request, response, "WEB-INF/views/board/list.jsp");
+
 		}
 		
 		

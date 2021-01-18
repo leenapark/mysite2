@@ -64,7 +64,7 @@ public class BoardDao {
 			}
 		}
 		/************리스트*************/
-		public List<BoardVo> getList() {
+		public List<BoardVo> getList(String str) {
 			List<BoardVo> list = new ArrayList<BoardVo>();
 			
 			getconnection();
@@ -82,37 +82,64 @@ public class BoardDao {
 				query += "			user_no ";
 				query += " from board ";
 				*/
-				query += " select   b.no, ";
-				query += "			b.title, ";
-				query += "			b.content, ";
-				query += "			b.hit, ";
-				query += "			to_char(b.reg_date, 'yyyy-mm-dd') regDate, ";
-				query += "			b.user_no, ";
-				query += "			u.name, ";
-				query += "			u.id ";
-				query += " from board b, users u ";
-				query += " where u.no = user_no ";
+				if (str == null) {
+					
+					query += " select   b.no, ";
+					query += "			b.title, ";
+					query += "			b.hit, ";
+					query += "			to_char(b.reg_date, 'yyyy-mm-dd') regDate, ";
+					query += "			b.user_no, ";
+					query += "			u.name ";
+					query += " from board b, users u ";
+					query += " where u.no = b.user_no ";
+					query += " order by b.no desc ";
+					
+					pstmt = conn.prepareStatement(query);
+				
+				} else {
+					
+					query += " select   b.no, ";
+					query += "			b.title, ";
+					query += "			b.hit, ";
+					query += "			to_char(b.reg_date, 'yyyy-mm-dd') regDate, ";
+					query += "			b.user_no, ";
+					query += "			u.name ";
+					query += " from board b, users u ";
+					query += " where u.no = b.user_no ";
+					query += " and (b.title like ? ";
+					query += " or u.name like ? ";
+					query += " or b.reg_date like ? ) ";
+					query += " order by b.no desc ";
+					
+					pstmt = conn.prepareStatement(query);
+					
+					str = "%" + str + "%";
+					
+					pstmt.setString(1, str);
+					pstmt.setString(2, str);
+					pstmt.setString(3, str);
+					
+					
+				}
 				
 				
 				// 쿼리문 확인
 				System.out.println(query);
 
 				// 쿼리문 만들기
-				pstmt = conn.prepareStatement(query);
+				
 				rs = pstmt.executeQuery();
 
 				// 4.결과처리
 				while(rs.next()) {
 					int no = rs.getInt("no");
 					String title = rs.getString("title");
-					String content = rs.getString("content");
 					int hit = rs.getInt("hit");
 					String regDate = rs.getString("regDate");
 					int userNo = rs.getInt("user_no");
-					String id = rs.getString("id");
 					String name = rs.getString("name");
 					
-					BoardVo vo = new BoardVo(no, title, content, hit, regDate, userNo, id, name);
+					BoardVo vo = new BoardVo(no, title, hit, regDate, userNo, name);
 					list.add(vo);
 					
 				}
@@ -170,7 +197,7 @@ public class BoardDao {
 
 		/*************글 보기*************/
 		
-		public BoardVo getread(int no) {
+		public BoardVo getRead(int no) {
 			BoardVo boardVo = null;
 			
 			getconnection();
@@ -194,7 +221,6 @@ public class BoardDao {
 				query += "			b.title, ";
 				query += "			b.content, ";
 				query += "			b.user_no, ";
-				query += "			u.id ";
 				query += " from board b, users u ";
 				query += " where b.user_no = u.no ";
 				query += " and b.no = ? ";
@@ -216,11 +242,10 @@ public class BoardDao {
 					int hit = rs.getInt("hit");
 					String regDate = rs.getString("regDate");
 					int userNo = rs.getInt("user_no");
-					String id = rs.getString("id");
 					String name = rs.getString("name");
 					
 					
-					boardVo = new BoardVo(bno, title, content, hit, regDate, userNo, id, name);
+					boardVo = new BoardVo(bno, title, content, hit, regDate, userNo, name);
 				}
 				
 				
@@ -268,71 +293,6 @@ public class BoardDao {
 			
 			close();
 			return count;
-		}
-		
-		/***********수정할 게시물 꺼내기******/
-		public BoardVo getPost(int bno) {
-			BoardVo boardVo = null;
-			
-			getconnection();
-			
-			try {
-				// 3. SQL문 준비 / 바인딩 / 실행
-				/* 
-				   select   b.no,
-        					b.title,
-        					b.content,
-        					b.hit,
-        					to_char(b.reg_date, 'yyyy-mm-dd') regDate,
-        					b.user_no,
-        					u.name
-					from board b, users u
-					where b.user_no = u.no (세션에 있는 users no 랑 board user_no 값이 같고
-					and b.no = 1;			해당 게시물 번호를 가져오기)
-				*/
-				
-				String query = "";
-				query += " select   b.no, ";
-				query += "			b.title, ";
-				query += "			b.content, ";
-				query += "			b.hit, ";
-				query += "			to_char(b.reg_date, 'yyyy-mm-dd') regDate, ";
-				query += "			b.user_no, ";
-				query += "			u.name ";
-				query += " from board b, users u ";
-				query += " where b.user_no = u.no ";
-				query += " and b.no = ? ";
-
-				System.out.println(query);
-
-				// 쿼리문 만들기
-				pstmt = conn.prepareStatement(query);
-				pstmt.setInt(1, bno);
-				
-				rs = pstmt.executeQuery();
-				
-
-				// 4.결과처리
-				while(rs.next()) {
-					int no = rs.getInt("no");
-					String title =  rs.getString("title");
-					String content = rs.getString("content");
-					int hit = rs.getInt("hit");
-					String regDate = rs.getString("regDate");
-					int userNo = rs.getInt("user_no");
-					String name = rs.getString("name");
-					
-					boardVo = new BoardVo(no, title, content, hit, regDate, userNo, name);
-				}
-				
-				} catch (SQLException e) {
-							System.out.println("error:" + e);
-						}
-			
-			close();
-			
-			return boardVo;
-			
 		}
 
 		/*************수정*************/
@@ -412,5 +372,7 @@ public class BoardDao {
 			close();
 			return count;
 		}
+		
+		
 		
 }

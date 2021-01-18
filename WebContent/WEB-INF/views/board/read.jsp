@@ -75,7 +75,7 @@
 							</span>
 						</div>
 												
-						<c:if test="${authUser.name == read.name }">
+						<c:if test="${authUser.no == read.no }">
 						<a id="btn_modify" href="/mysite2/board?action=mform&no=${read.no }">수정</a>
 						</c:if>
 						<a id="btn_modify" href="/mysite2/board?action=list">목록</a>

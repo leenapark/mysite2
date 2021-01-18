@@ -10,21 +10,20 @@ public class BoardVo {
 	private int hit;
 	private String regDate;
 	private int userNo;
-	private String id;
 	private String name;
 	
 	// 생성자	
 	public BoardVo() {
 	}
 
-	/*******modify 생성자*****/
+	/*******Controller modify 생성자*****/
 	public BoardVo(int no, String title, String content) {
 		this.no = no;
 		this.title = title;
 		this.content = content;
 	}
 
-	/*****write 생성자*****/
+	/*****Controller write 생성자*****/
 	public BoardVo(String title, String content, int userNo) {
 		super();
 		this.title = title;
@@ -32,36 +31,19 @@ public class BoardVo {
 		this.userNo = userNo;
 	}
 	
-	
-	
-
-
-	/**********read test*********/
-	public BoardVo(String title, String content, int hit, String regDate, String id, String name) {
-		super();
+	/**************Dao getList 생성자**********/
+	public BoardVo(int no, String title, int hit, String regDate, int userNo, String name) {
+		this.no = no;
 		this.title = title;
-		this.content = content;
-		this.hit = hit;
-		this.regDate = regDate;
-		this.id = id;
-		this.name = name;
-	}
-
-	
-	
-	
-	public BoardVo(String title, String content, int hit, String regDate, int userNo, String id, String name) {
-		this.title = title;
-		this.content = content;
 		this.hit = hit;
 		this.regDate = regDate;
 		this.userNo = userNo;
-		this.id = id;
 		this.name = name;
 	}
 
+
+	/**************Dao getRead 생성자**********/
 	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo, String name) {
-		super();
 		this.no = no;
 		this.title = title;
 		this.content = content;
@@ -70,25 +52,10 @@ public class BoardVo {
 		this.userNo = userNo;
 		this.name = name;
 	}
+	
+	
 
-	
-	
-	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo, String id, String name) {
-		this.no = no;
-		this.title = title;
-		this.content = content;
-		this.hit = hit;
-		this.regDate = regDate;
-		this.userNo = userNo;
-		this.id = id;
-		this.name = name;
-	}
-	
-	
-	
 	// 메소드 g/s
-
-
 	public int getNo() {
 		return no;
 	}
@@ -148,14 +115,6 @@ public class BoardVo {
 		this.userNo = userNo;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 
 	public String getName() {
@@ -173,7 +132,7 @@ public class BoardVo {
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", regDate="
-				+ regDate + ", userNo=" + userNo + ", id=" + id + ", name=" + name + "]";
+				+ regDate + ", userNo=" + userNo + ", name=" + name + "]";
 	}
 	
 

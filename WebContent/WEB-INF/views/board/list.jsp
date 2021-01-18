@@ -50,12 +50,13 @@
 
 			<div id="board">
 				<div id="list">
-					<form action="" method="">
+					<form action="/mysite2/board" method="get">
 						<div class="form-group text-right">
-							<input type="text">
+							<input type="text" name="str">
 							<button type="submit" id=btn_search>검색</button>
 						</div>
 					</form>
+					
 				
 					<table >
 						<thead>
@@ -77,14 +78,14 @@
 								<td>2020-12-23</td>
 								<td><a href="">[삭제]</a></td>
 							</tr>
-							<c:forEach items="${bList}" var="list">
+							<c:forEach items="${bList}" var="vo">
 								<tr>
-								<td>${list.no }</td>
+								<td>${vo.no }</td>
 								<td class="text-left"><a href="/mysite2/board?action=content&no=${list.no }">${list.title }</a></td>
-								<td>${list.name }</td>
-								<td>${list.hit }</td>
-								<td>${list.regDate }</td>
-								<td><c:if test="${authUser.name == list.name }"><a href="/mysite2/board?action=delete&no=${list.no }">[삭제]</a></c:if></td>
+								<td>${vo.name }</td>
+								<td>${vo.hit }</td>
+								<td>${vo.regDate }</td>
+								<td><c:if test="${authUser.name == vo.name }"><a href="/mysite2/board?action=delete&no=${list.no }">[삭제]</a></c:if></td>
 								
 							</tr>
 							</c:forEach>
@@ -113,7 +114,7 @@
 					
 					
 					
-					<c:if test="${authUser.name != null }">
+					<c:if test="${authUser.no != null }">
 					<a id="btn_write" href="/mysite2/board?action=wform">글쓰기</a>
 					</c:if>
 				</div>
