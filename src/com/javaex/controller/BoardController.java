@@ -46,30 +46,17 @@ public class BoardController extends HttpServlet {
 			HttpSession session = request.getSession();
 			UserVo authUser = (UserVo) session.getAttribute("authUser");
 			
-			if(authUser == null) {
+			if(authUser == null || readVo.getUserNo() != authUser.getNo()) {
 
 				boardDao.hitUp(no);
 				
-				System.out.println("controller: " + readVo);
 				request.setAttribute("read", readVo);
 				System.out.println("read controller: " + readVo);
 
 				
 				WebUtil.forword(request, response, "WEB-INF/views/board/read.jsp");	
 				
-			} else if (readVo.getUserNo() != authUser.getNo()) {
-				
-				boardDao.hitUp(no);
-				
-				System.out.println("controller: " + readVo);
-				request.setAttribute("read", readVo);
-				System.out.println("read controller: " + readVo);
-
-				
-				WebUtil.forword(request, response, "WEB-INF/views/board/read.jsp");
-
-
-			} else if(readVo.getUserNo() == authUser.getNo()) {
+			}  else if(readVo.getUserNo() == authUser.getNo()) {
 				
 
 				request.setAttribute("read", readVo);
@@ -142,18 +129,15 @@ public class BoardController extends HttpServlet {
 			WebUtil.redirect(request, response, "/mysite2/board?action=list");
 		} else {
 			
-			System.out.println("게시판");
-			System.out.println("검색");
+			System.out.println("게시판 + 검색 기능");
 
 			String str = request.getParameter("str");
 			System.out.println(str);
 			
+			// 리스트 + 검색 기능이 있는 Dao 사용
 			List<BoardVo> searchList = boardDao.getList(str);
 			
 			System.out.println(searchList);
-			
-			// 화면 출력용 리스트 만들기
-			//List<BoardVo> bList = boardDao.getList();
 
 			System.out.println("blist: " + searchList);
 
