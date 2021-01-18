@@ -85,7 +85,7 @@
 				
 				
 				<table class="guestRead">
-				<c:forEach items="${aList}" var="list">
+				<c:forEach items="${aList}" var="gVo">
 					<colgroup>
 							<col style="width: 10%;">
 							<col style="width: 40%;">
@@ -93,13 +93,13 @@
 							<col style="width: 10%;">
 					</colgroup>
 					<tr>
-						<td>${list.no}</td>
-						<td>${list.name }</td>
-						<td>${list.regDate }</td>
-						<td><a href="/mysite2/gbc?action=dForm&no=${list.no }">[삭제]</a></td>
+						<td>${gVo.no}</td>
+						<td>${gVo.name }</td>
+						<td>${gVo.regDate }</td>
+						<td><a href="/mysite2/gbc?action=dForm&no=${gVo.no }">[삭제]</a></td>
 					</tr>
 					<tr>
-						<td colspan=4 class="text-left">${list.content }</td>
+						<td colspan=4 class="text-left">${gVo.content }</td>
 					</tr>
 				</c:forEach>
 				</table>

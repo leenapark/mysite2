@@ -78,14 +78,14 @@
 								<td>2020-12-23</td>
 								<td><a href="">[삭제]</a></td>
 							</tr>
-							<c:forEach items="${bList}" var="vo">
+							<c:forEach items="${bList}" var="bVo">
 								<tr>
-								<td>${vo.no }</td>
-								<td class="text-left"><a href="/mysite2/board?action=content&no=${list.no }">${list.title }</a></td>
-								<td>${vo.name }</td>
-								<td>${vo.hit }</td>
-								<td>${vo.regDate }</td>
-								<td><c:if test="${authUser.name == vo.name }"><a href="/mysite2/board?action=delete&no=${list.no }">[삭제]</a></c:if></td>
+								<td>${bVo.no }</td>
+								<td class="text-left"><a href="/mysite2/board?action=content&no=${bVo.no }">${bVo.title }</a></td>
+								<td>${bVo.name }</td>
+								<td>${bVo.hit }</td>
+								<td>${bVo.regDate }</td>
+								<td><c:if test="${authUser.no == bVo.userNo }"><a href="/mysite2/board?action=delete&no=${bVo.no }">[삭제]</a></c:if></td>
 								
 							</tr>
 							</c:forEach>
@@ -114,7 +114,7 @@
 					
 					
 					
-					<c:if test="${authUser.no != null }">
+					<c:if test="${authUser != null }">
 					<a id="btn_write" href="/mysite2/board?action=wform">글쓰기</a>
 					</c:if>
 				</div>
